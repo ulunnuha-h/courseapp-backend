@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Category = require('./categories');
 
 const Course = new mongoose.Schema({
     title : {
@@ -7,12 +6,9 @@ const Course = new mongoose.Schema({
         required : true
     },
     category : {
-        type : [Category.Schema],
-        required : true
+        type : mongoose.ObjectId,
+        ref : 'Category'
     },
 })
 
-module.exports = {
-    Model : mongoose.model('Course',Course), 
-    Schema : Course
-};
+module.exports = mongoose.model('Course',Course)    
