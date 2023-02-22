@@ -20,6 +20,9 @@ app.get('/',(req, res)=>{
 const categories = require('./routes/categories');
 app.use('/categories',categories);
 
+const courses = require('./routes/courses');
+app.use('/courses', courses);
+
 app.listen(8080, () => {
     console.log("Server is running");
 })
