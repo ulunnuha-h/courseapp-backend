@@ -27,6 +27,9 @@ const users = require('./routes/users/crud');
 const userCourse = require('./routes/users/courses');
 app.use('/users',users, userCourse);
 
+const admin = require('./routes/admin');
+app.use('/admin',admin);
+
 app.listen(8080, () => {
     console.log("Server is running");
 })
