@@ -9,6 +9,11 @@ const Course = new mongoose.Schema({
         type : mongoose.ObjectId,
         ref : 'Category'
     },
+    users : [{
+        type : mongoose.ObjectId,
+        ref : 'User',
+        default : undefined
+    }]
 })
 
 module.exports = mongoose.model('Course',Course)    

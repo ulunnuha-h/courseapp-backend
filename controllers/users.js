@@ -1,8 +1,8 @@
-const Model = require('../models/users');
+const User = require('../models/users')
 
 const getUsers = async (req, res) =>{
     try {
-        const users = await Model.find();
+        const users = await User.find();
         if(users == null){
             return res.status(404).json({message : 'Users not found'});
         }
@@ -16,7 +16,7 @@ const getUsers = async (req, res) =>{
 const getUserById = async (req, res) => {
     const {id} = req.params;
     try {
-        const user = await Model.findById(id);
+        const user = await User.findById(id);
         if(user == null) return res.status(404).json({message : 'User not found'});
 
         return res.json(user);
@@ -27,7 +27,7 @@ const getUserById = async (req, res) => {
 
 const addUser = async (req, res) => {
     const {name, email, password} = req.body;
-    const user = new Model({
+    const user = new User({
         name,
         email,
         password,
@@ -46,7 +46,7 @@ const updateUser = async (req, res) => {
     const {name, email, password} = req.body;
     const {id} = req.params;
     try {
-        const user = await Model.findById(id);
+        const user = await User.findById(id);
         if(name != null) user.name = name;
         if(email != null) user.email = email;
         if(password != null) user.password = password;
@@ -61,7 +61,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     const {id} = req.params;
     try {
-        const user = await Model.findById(id);
+        const user = await User.findById(id);
         await user.remove();
 
         return res.json({message : 'User deleted successfully'});

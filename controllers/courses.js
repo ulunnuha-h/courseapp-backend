@@ -1,8 +1,8 @@
-const Model = require('../models/courses');
+const Course = require('../models/courses');
 
 const getCourses = async (req, res) =>{
     try {
-        const courses = await Model.find().populate('category');
+        const courses = await Course.find().populate('category');
         if(courses == null){
             return res.status(404).json({message: 'Courses not found'});
         }
@@ -16,7 +16,7 @@ const getCourses = async (req, res) =>{
 const getCourseById = async (req, res) => {
     try {
         const {id} = req.params;
-        const course = await Model.findById(id);
+        const course = await Course.findById(id);
         if(course == null){
             return json.status(404).json({message : 'Course not found'});
         }
@@ -28,7 +28,7 @@ const getCourseById = async (req, res) => {
 
 const addCourse = async (req, res) => {
     const {title, category} = req.body;
-    const course = new Model({
+    const course = new Course({
         title,
         category
     })
@@ -45,7 +45,7 @@ const updateCourse = async (req, res) => {
     const {id} = req.params;
     const {title, category} = req.body;
     try {
-        const course = await Model.findById(id);
+        const course = await Course.findById(id);
         if(title != null) course.title = title;
         if(category != null) course.category = category;
         const updatedCourse = await course.save();
@@ -58,7 +58,7 @@ const updateCourse = async (req, res) => {
 const deleteCourse = async (req, res) => {
     const {id} = req.params;
     try {
-        const course = await Model.findById(id);
+        const course = await Course.findById(id);
         await course.remove();
 
         res.json({message : "Course deleted successfully"});
