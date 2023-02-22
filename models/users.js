@@ -13,9 +13,10 @@ const User = new mongoose.Schema({
         type : 'String',
         required : true
     },
-    course : [{
+    courses : [{
         type : mongoose.ObjectId,
-        ref : 'Course'
+        ref : 'Course',
+        default : undefined
     }]
     
 })
